@@ -8,17 +8,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Logic;
 
 namespace NoteBook
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private Notebook notebook;
+
         public MainWindow()
         {
             InitializeComponent();
+            notebook = new Notebook();
+        }
+
+        private void GoEditUnits(object sender, RoutedEventArgs e)
+        {
+            EditUnitsWindow second = new EditUnitsWindow(notebook);
+            second.Show();
         }
     }
 }

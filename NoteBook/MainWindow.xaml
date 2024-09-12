@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoteBook"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Carnet de Notes" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <!-- Ajoutez une image de fond si vous le souhaitez -->
+        <Image Source="background.jpg" Stretch="Fill" Grid.Row="0" Opacity="0.3"/>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Carnet de Notes" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <Button Name="EditUnitsButton" Content="Editer les unités" Width="200" Height="50" FontSize="16" FontWeight="Bold" Click="GoEditUnits"/>
+        </StackPanel>
     </Grid>
 </Window>
