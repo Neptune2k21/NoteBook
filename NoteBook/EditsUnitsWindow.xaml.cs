@@ -1,17 +1,16 @@
 ﻿using Logic;
 using System.Windows;
+using System.Windows.Controls; // Nécessaire pour SelectionChangedEventArgs
 
 namespace NoteBook
 {
-    /// <summary>
-    /// Logique d'interaction pour EditsUnitsWindow.xaml
-    /// </summary>
     public partial class EditUnitsWindow : Window
     {
         private Notebook notebook;
+
         public EditUnitsWindow(Notebook notebook)
         {
-            InitializeComponent(); // Ensure this method is defined in the corresponding XAML file
+            InitializeComponent();
             this.notebook = notebook;
             DrawUnits();
         }
@@ -26,9 +25,27 @@ namespace NoteBook
             }
         }
 
+        private void DrawModules()
+        {
+            if (unitsList.SelectedItem is Unit unit)
+            {
+                var list = unit.ListModules();  
+                modulesList.Items.Clear(); 
+                foreach (Module m in list)
+                {
+                    modulesList.Items.Add($"{m.Name} ({m.Coefficient})");
+                }
+            }
+        }
+
+        private void SelectUnit(object sender, SelectionChangedEventArgs e)
+        {
+            DrawModules();  
+        }
+
         private void AddUnit(object sender, RoutedEventArgs e)
         {
-            Unit newUnit = new Unit("Nouvelle Unité", 1.0f);  // Crée un nouvel objet Unit temporaire
+            Unit newUnit = new Unit("Nouvelle Unité", 1.0f); 
             EditElementWindow third = new EditElementWindow(newUnit);
             if (third.ShowDialog() == true)
             {
@@ -46,7 +63,5 @@ namespace NoteBook
                 DrawUnits();
             }
         }
-
-
     }
 }

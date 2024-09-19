@@ -20,7 +20,7 @@
 
         <StackPanel Grid.Column="0" Margin="10">
             <Label Content="Liste des unités d'enseignement:" FontWeight="Bold" FontSize="16"/>
-            <ListBox Name="unitsList" Height="250" Width="400" Margin="0,10"/>
+            <ListBox Name="unitsList" Height="250" Width="400" Margin="0,10" SelectionChanged="SelectUnit"/>
 
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10">
