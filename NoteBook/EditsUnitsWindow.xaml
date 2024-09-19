@@ -30,9 +30,9 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="10">
             <Label Content="Liste des modules de l'unité sélectionnée:" FontWeight="Bold" FontSize="16"/>
-            <ListBox Name="modulesList" Height="250" Width="400" Margin="0,10"/>
+            <ListBox Name="modulesList" Height="250"  Width="400" Margin="0,10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10">
-                <Button Name="AddModuleButton" Content="Ajouter un module" Width="150" Height="30" Margin="5"/>
+                <Button Name="AddModuleButton" Content="Ajouter un module" Click="AddModule" Width="150" Height="30" Margin="5"/>
                 <Button Name="RemoveModuleButton" Content="Supprimer un module" Width="150" Height="30" Margin="5"/>
             </StackPanel>
         </StackPanel>

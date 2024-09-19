@@ -77,6 +77,22 @@ namespace NoteBook
                 }
             }
         }
+        private void AddModule(object sender, RoutedEventArgs e)
+        {
+            if (unitsList.SelectedIndex >= 0)
+            {
+                var selectedUnit = notebook.ListUnits()[unitsList.SelectedIndex];
+                Module newModule = new Module("Nouveau Module", 1.0f);  
+
+                EditElementWindow editWindow = new EditElementWindow(newModule);
+                if (editWindow.ShowDialog() == true)
+                {
+                    selectedUnit.AddModule(newModule);  
+                    DrawModules(); 
+                }
+            }
+        }
+
 
     }
 }
