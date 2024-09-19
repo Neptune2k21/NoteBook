@@ -1,6 +1,6 @@
 ﻿using Logic;
 using System.Windows;
-using System.Windows.Controls; // Nécessaire pour SelectionChangedEventArgs
+using System.Windows.Controls;
 
 namespace NoteBook
 {
@@ -21,7 +21,7 @@ namespace NoteBook
             unitsList.Items.Clear();
             foreach (var unit in list)
             {
-                unitsList.Items.Add($"{unit.Name} ({unit.Coefficient})");
+                unitsList.Items.Add(unit); 
             }
         }
 
@@ -29,25 +29,25 @@ namespace NoteBook
         {
             if (unitsList.SelectedItem is Unit unit)
             {
-                var list = unit.ListModules();  
-                modulesList.Items.Clear(); 
-                foreach (Module m in list)
+                var modules = unit.ListModules();
+                modulesList.Items.Clear();
+                foreach (var module in modules)
                 {
-                    modulesList.Items.Add($"{m.Name} ({m.Coefficient})");
+                    modulesList.Items.Add(module);
                 }
             }
         }
 
         private void SelectUnit(object sender, SelectionChangedEventArgs e)
         {
-            DrawModules();  
+            DrawModules(); 
         }
 
         private void AddUnit(object sender, RoutedEventArgs e)
         {
-            Unit newUnit = new Unit("Nouvelle Unité", 1.0f); 
-            EditElementWindow third = new EditElementWindow(newUnit);
-            if (third.ShowDialog() == true)
+            Unit newUnit = new Unit("Nouvelle Unité", 1.0f);
+            EditElementWindow editWindow = new EditElementWindow(newUnit);
+            if (editWindow.ShowDialog() == true)
             {
                 notebook.AddUnit(newUnit);
                 DrawUnits();
@@ -58,41 +58,54 @@ namespace NoteBook
         {
             if (unitsList.SelectedIndex >= 0)
             {
-                var unit = notebook.ListUnits()[unitsList.SelectedIndex];
+                var unit = (Unit)unitsList.SelectedItem;
                 notebook.RemoveUnit(unit);
                 DrawUnits();
+                modulesList.Items.Clear(); 
             }
         }
+
         private void EditModule(object sender, RoutedEventArgs e)
         {
             if (modulesList.SelectedIndex >= 0)
             {
-                var selectedUnit = notebook.ListUnits()[unitsList.SelectedIndex];
+                var selectedUnit = (Unit)unitsList.SelectedItem; 
                 var selectedModule = selectedUnit.ListModules()[modulesList.SelectedIndex];
 
-                EditElementWindow editWindow = new EditElementWindow(selectedModule); 
+                EditElementWindow editWindow = new EditElementWindow(selectedModule);
                 if (editWindow.ShowDialog() == true)
                 {
-                    DrawModules(); 
+                    DrawModules();
                 }
             }
         }
+
         private void AddModule(object sender, RoutedEventArgs e)
         {
             if (unitsList.SelectedIndex >= 0)
             {
-                var selectedUnit = notebook.ListUnits()[unitsList.SelectedIndex];
-                Module newModule = new Module("Nouveau Module", 1.0f);  
+                var selectedUnit = (Unit)unitsList.SelectedItem;
+                Module newModule = new Module("Nouveau Module", 1.0f);
 
                 EditElementWindow editWindow = new EditElementWindow(newModule);
                 if (editWindow.ShowDialog() == true)
                 {
-                    selectedUnit.AddModule(newModule);  
+                    selectedUnit.AddModule(newModule);
                     DrawModules(); 
                 }
             }
         }
 
+        private void RemoveModule(object sender, RoutedEventArgs e)
+        {
+            if (modulesList.SelectedIndex >= 0)
+            {
+                var selectedUnit = (Unit)unitsList.SelectedItem; 
+                var selectedModule = selectedUnit.ListModules()[modulesList.SelectedIndex];
 
+                selectedUnit.RemoveModule(selectedModule);
+                DrawModules(); 
+            }
+        }
     }
 }

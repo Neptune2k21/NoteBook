@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic
 {
     public class Notebook
     {
         private List<Unit> units;
+        private List<Exam> exams; 
 
         public Notebook()
         {
             units = new List<Unit>();
+            exams = new List<Exam>(); 
         }
+
 
         public void AddUnit(Unit unit)
         {
@@ -23,7 +24,6 @@ namespace Logic
             }
             units.Add(unit);
         }
-
 
         public Unit[] ListUnits()
         {
@@ -37,6 +37,23 @@ namespace Logic
                 throw new ArgumentException("L'unité n'existe pas.");
             }
             units.Remove(unit);
+        }
+
+
+        public Module[] ListModules()
+        {
+            return units.SelectMany(unit => unit.ListModules()).ToArray();
+        }
+
+
+        public void AddExam(Exam exam)
+        {
+            exams.Add(exam);
+        }
+
+        public Exam[] ListExams()
+        {
+            return exams.ToArray();
         }
     }
 }

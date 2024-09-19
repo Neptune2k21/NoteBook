@@ -27,5 +27,14 @@ namespace NoteBook
             EditUnitsWindow second = new EditUnitsWindow(notebook);
             second.Show();
         }
+
+        private void GoCreateExam(object sender, RoutedEventArgs e)
+        {
+            EditExamWindow editExamWindow = new EditExamWindow(notebook);
+            if (editExamWindow.ShowDialog() == true)
+            {
+               
+            }
+        }
     }
 }

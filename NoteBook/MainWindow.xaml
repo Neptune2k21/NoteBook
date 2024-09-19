@@ -11,10 +11,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Text="Carnet de Notes" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
             <Button Name="EditUnitsButton" Content="Editer les unités" Width="200" Height="50" FontSize="16" FontWeight="Bold" Click="GoEditUnits"/>
+            <Button Name="CreateExamButton" Content="Créer un examen" Width="200" Height="50" FontSize="16" FontWeight="Bold" Click="GoCreateExam"/>
         </StackPanel>
     </Grid>
 </Window>

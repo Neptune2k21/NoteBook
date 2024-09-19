@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logic
 {
     public class Unit : EducationalElement
     {
+
         public List<Module> Modules { get; private set; }
 
         public Unit(string name, float coefficient)
@@ -12,6 +14,7 @@ namespace Logic
         {
             Modules = new List<Module>();
         }
+
 
         public void AddModule(Module module)
         {
@@ -33,7 +36,13 @@ namespace Logic
 
         public Module[] ListModules()
         {
-            return Modules.ToArray(); 
+            return Modules.ToArray();
+        }
+
+        
+        public override string ToString()
+        {
+            return $"{Name} ({Coefficient})";
         }
     }
 }
