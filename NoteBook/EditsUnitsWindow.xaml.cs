@@ -63,5 +63,20 @@ namespace NoteBook
                 DrawUnits();
             }
         }
+        private void EditModule(object sender, RoutedEventArgs e)
+        {
+            if (modulesList.SelectedIndex >= 0)
+            {
+                var selectedUnit = notebook.ListUnits()[unitsList.SelectedIndex];
+                var selectedModule = selectedUnit.ListModules()[modulesList.SelectedIndex];
+
+                EditElementWindow editWindow = new EditElementWindow(selectedModule); 
+                if (editWindow.ShowDialog() == true)
+                {
+                    DrawModules(); 
+                }
+            }
+        }
+
     }
 }
