@@ -15,7 +15,6 @@ namespace Logic
             units = new List<Unit>();
         }
 
-        // Ajoute une unité d'enseignement
         public void AddUnit(Unit unit)
         {
             if (units.Exists(u => u.Name == unit.Name))
@@ -25,13 +24,12 @@ namespace Logic
             units.Add(unit);
         }
 
-        // Renvoie les unités sous forme de tableau
+
         public Unit[] ListUnits()
         {
             return units.ToArray();
         }
 
-        // Supprime une unité d'enseignement
         public void RemoveUnit(Unit unit)
         {
             if (!units.Contains(unit))

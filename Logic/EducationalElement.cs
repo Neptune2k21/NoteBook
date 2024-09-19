@@ -39,7 +39,7 @@ namespace Logic
 
         public EducationalElement(string name, float coefficient)
         {
-            Name = name; // Cela passe par la propriété pour inclure la validation
+            Name = name;
             Coefficient = coefficient;
         }
     }

@@ -76,7 +76,7 @@ namespace Logic
             public void MarkAsAbsent()
             {
                 IsAbsent = true;
-                Score = 0; // La note d'absence est 0
+                Score = 0;
             }
         }
     }
