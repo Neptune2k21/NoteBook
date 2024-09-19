@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace Logic
 {
@@ -34,6 +30,10 @@ namespace Logic
             }
             Modules.Remove(module);
         }
+
+        public Module[] ListModules()
+        {
+            return Modules.ToArray(); 
+        }
     }
 }
-
