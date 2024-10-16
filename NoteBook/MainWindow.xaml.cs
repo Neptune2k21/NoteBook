@@ -36,5 +36,11 @@ namespace NoteBook
                
             }
         }
+        private void GoListExams(object sender, RoutedEventArgs e)
+        {
+            ListExamsWindow listExamsWindow = new ListExamsWindow(notebook);
+            listExamsWindow.Show();
+        }
+
     }
 }
