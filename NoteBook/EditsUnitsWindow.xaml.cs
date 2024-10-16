@@ -107,5 +107,9 @@ namespace NoteBook
                 DrawModules(); 
             }
         }
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

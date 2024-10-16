@@ -41,6 +41,10 @@ namespace NoteBook
             ListExamsWindow listExamsWindow = new ListExamsWindow(notebook);
             listExamsWindow.Show();
         }
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
     }
 }

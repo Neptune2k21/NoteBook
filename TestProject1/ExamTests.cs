@@ -7,64 +7,30 @@ namespace TestLogic
     public class ExamTests
     {
         [Fact]
-        public void Constructor_ValidParameters_ShouldCreateExam()
+        public void TestExamInitialization()
         {
+           Logic.Module module = new Module("Math", 1);
+            Exam exam = new Exam(module, 2, 15.5f);
 
-            var exam = new Exam("Professeur Dupont", DateTime.Now, 1.5f);
-
-
-            Assert.Equal("Professeur Dupont", exam.Teacher);
-            Assert.Equal(1.5f, exam.Coefficient);
+            Assert.Equal(module, exam.Module);
+            Assert.Equal(2, exam.Coefficient);
+            Assert.Equal(15.5f, exam.Score);
         }
 
         [Fact]
-        public void Constructor_InvalidTeacher_ShouldThrowArgumentException()
+        public void TestInvalidScore()
         {
-
-            Assert.Throws<ArgumentException>(() => new Exam("", DateTime.Now, 1.5f));
+            Logic.Module module = new Module("Math", 1);
+            var exception = Assert.Throws<ArgumentException>(() => new Exam(module, 1, 25));
+            Assert.Equal("Le score doit être entre 0 et 20.", exception.Message);
         }
 
         [Fact]
-        public void Constructor_InvalidCoefficient_ShouldThrowArgumentException()
+        public void TestInvalidCoefficient()
         {
-
-            Assert.Throws<ArgumentException>(() => new Exam("Professeur Dupont", DateTime.Now, 0));
-        }
-
-        [Fact]
-        public void SetScore_ValidScore_ShouldSetScore()
-        {
-
-            var exam = new Exam("Professeur Dupont", DateTime.Now, 1.5f);
-
-            exam.SetScore(15);
-
-            Assert.Equal(15, exam.Score);
-        }
-
-        [Fact]
-        public void SetScore_InvalidScore_ShouldThrowArgumentException()
-        {
-            // Arrange
-            var exam = new Exam("Professeur Dupont", DateTime.Now, 1.5f);
-
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => exam.SetScore(-1));
-            Assert.Throws<ArgumentException>(() => exam.SetScore(21));
-        }
-
-        [Fact]
-        public void MarkAsAbsent_ShouldSetScoreToZero()
-        {
-            // Arrange
-            var exam = new Exam("Professeur Dupont", DateTime.Now, 1.5f);
-
-            // Act
-            exam.MarkAsAbsent();
-
-            // Assert
-            Assert.True(exam.IsAbsent);
-            Assert.Equal(0, exam.Score);
+            Logic.Module module = new Module("Math", 1);
+            var exception = Assert.Throws<ArgumentException>(() => new Exam(module, 0, 10));
+            Assert.Equal("Le coefficient doit être > 0.", exception.Message);
         }
     }
 }

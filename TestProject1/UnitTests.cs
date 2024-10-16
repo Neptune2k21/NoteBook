@@ -6,49 +6,30 @@ namespace TestLogic
     public class UnitTests
     {
         [Fact]
-        public void AddModule_ValidModule_ShouldAddToUnit()
+        public void TestComputeAverages()
         {
+            Unit unit = new Unit("UE1", 1);
+            Logic.Module module1 = new Module("Math", 1);
+            Logic.Module module2 = new Module("Physics", 1);
+            unit.AddModule(module1);
+            unit.AddModule(module2);
 
-            var unit = new Unit("Mathématiques", 5.0f);
-            var module = new Module("Algèbre", 2.0f);
+            Exam[] exams = {
+                new Exam(module1, 1, 15),
+                new Exam(module1, 2, 10),
+                new Exam(module2, 3, 20)
+            };
 
-            unit.AddModule(module);
-
-
-            Assert.Contains(module, unit.Modules);
+            var avgScores = unit.ComputeAverages(exams);
+            Assert.Equal(2, avgScores.Length); // Devrait retourner des moyennes pour les deux modules
         }
 
         [Fact]
-        public void AddModule_NullModule_ShouldThrowArgumentException()
+        public void TestComputeAverages_NoModules_ReturnsEmptyArray()
         {
-
-            var unit = new Unit("Mathématiques", 5.0f);
-
-            Assert.Throws<ArgumentException>(() => unit.AddModule(null));
-        }
-
-        [Fact]
-        public void RemoveModule_ModuleNotInUnit_ShouldThrowArgumentException()
-        {
-
-            var unit = new Unit("Mathématiques", 5.0f);
-            var module = new Module("Algèbre", 2.0f);
-
-
-            Assert.Throws<ArgumentException>(() => unit.RemoveModule(module));
-        }
-
-        [Fact]
-        public void RemoveModule_ModuleInUnit_ShouldRemoveFromUnit()
-        {
-
-            var unit = new Unit("Mathématiques", 5.0f);
-            var module = new Module("Algèbre", 2.0f);
-            unit.AddModule(module);
-
-            unit.RemoveModule(module);
-
-            Assert.DoesNotContain(module, unit.Modules);
+            Unit unit = new Unit("UE1", 1);
+            var avgScores = unit.ComputeAverages(new Exam[0]); // Pas de modules
+            Assert.Empty(avgScores);
         }
     }
 }

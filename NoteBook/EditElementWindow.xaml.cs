@@ -43,5 +43,9 @@ namespace NoteBook
                 MessageBox.Show(ex.Message);
             }
         }
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

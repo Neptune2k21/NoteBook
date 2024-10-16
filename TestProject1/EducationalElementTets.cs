@@ -10,7 +10,7 @@ namespace TestLogic
         public void Constructor_ValidParameters_ShouldCreateObject()
         {
             
-            var element = new Module("Algèbre", 2.0f);
+            var element = new Logic.Module("Algèbre", 2.0f);
 
 
             Assert.Equal("Algèbre", element.Name);
@@ -21,14 +21,14 @@ namespace TestLogic
         public void Constructor_InvalidName_ShouldThrowArgumentException()
         {
            
-            Assert.Throws<ArgumentException>(() => new Module("", 2.0f));
+            Assert.Throws<ArgumentException>(() => new Logic.Module("", 2.0f));
         }
 
         [Fact]
         public void Constructor_InvalidCoefficient_ShouldThrowArgumentException()
         {
             
-            Assert.Throws<ArgumentException>(() => new Module("Algèbre", 0));
+            Assert.Throws<ArgumentException>(() => new Logic.Module("Algèbre", 0));
         }
     }
 }
