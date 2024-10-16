@@ -55,5 +55,22 @@ namespace Logic
         {
             return exams.ToArray();
         }
+        public AvgScore[] ComputeUnitAverages()
+        {
+            return units.Select(u => u.ComputeAverages(exams.ToArray())).SelectMany(avgScores => avgScores).ToArray();
+        }
+
+        public AvgScore ComputeOverallAverage()
+        {
+            var unitAverages = ComputeUnitAverages();
+            if (unitAverages.Length == 0) return null;
+
+            float totalCoefficient = unitAverages.Sum(avg => avg.Element.Coefficient);
+            float weightedSum = unitAverages.Sum(avg => avg.Average * avg.Element.Coefficient);
+            float overallAverage = weightedSum / totalCoefficient;
+
+            var generalAverageElement = new Module("Moyenne Générale", 1);
+            return new AvgScore(generalAverageElement, overallAverage);
+        }
     }
 }

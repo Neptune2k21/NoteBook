@@ -30,8 +30,18 @@ namespace NoteBook
 
         private void DrawExams()
         {
+ 
             var exams = notebook.ListExams();
             ExamDataGrid.ItemsSource = exams;
+
+            ScoresListBox.Items.Clear(); 
+            var unitAverages = notebook.ComputeUnitAverages(); 
+
+            foreach (AvgScore avg in unitAverages)
+            {
+                ScoresListBox.Items.Add(avg);
+            }
         }
+
     }
 }

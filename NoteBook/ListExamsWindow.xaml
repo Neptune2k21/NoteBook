@@ -9,16 +9,15 @@
     <Grid>
         <DataGrid x:Name="ExamDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <DataGrid.Columns>
-
                 <DataGridTextColumn Header="Module" Binding="{Binding Module.Name}" Width="200" />
-
-
                 <DataGridTextColumn Header="Score" Binding="{Binding Score}" Width="100" />
-
                 <DataGridTextColumn Header="Coefficient" Binding="{Binding Coefficient}" Width="100" />
                 <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy}" Width="150" />
                 <DataGridCheckBoxColumn Header="Absent" Binding="{Binding IsAbsent}" Width="100" />
             </DataGrid.Columns>
         </DataGrid>
+
+        <!-- Ajout de la ListBox pour afficher les moyennes -->
+        <ListBox x:Name="ScoresListBox" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="150" Margin="0,0,0,10" />
     </Grid>
 </Window>

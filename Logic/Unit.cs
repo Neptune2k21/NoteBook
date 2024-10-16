@@ -44,5 +44,11 @@ namespace Logic
         {
             return $"{Name} ({Coefficient})";
         }
+
+        public AvgScore[] ComputeAverages(Exam[] exams)
+        {
+            var moduleAverages = Modules.Select(m => m.ComputeAverage(exams)).Where(avg => avg != null).ToArray();
+            return moduleAverages.Length == 0 ? Array.Empty<AvgScore>() : moduleAverages;
+        }
     }
 }

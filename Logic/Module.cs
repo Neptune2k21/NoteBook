@@ -14,5 +14,20 @@ namespace Logic
         {
             return $"{Name} ({Coefficient})";
         }
+        public AvgScore ComputeAverage(Exam[] exams)
+        {
+            var relevantExams = exams.Where(e => e.Module == this && !e.IsAbsent).ToArray();
+            if (relevantExams.Length == 0)
+            {
+                return null;
+            }
+
+            float totalCoefficient = relevantExams.Sum(e => e.Coefficient);
+            float weightedSum = relevantExams.Sum(e => e.Score * e.Coefficient);
+
+            float average = weightedSum / totalCoefficient;
+
+            return new AvgScore(this, average);
+        }
     }
 }
