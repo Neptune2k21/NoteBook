@@ -5,34 +5,114 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoteBook"
         mc:Ignorable="d"
-        Title="EditExamWindow" Height="450" Width="800">
-    <Grid>
+        Title="Edit Exam" Height="450" Width="500">
+    <Window.Resources>
+        <!-- Style for the buttons -->
+        <Style x:Key="StyledButton" TargetType="Button">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <!-- Green background -->
+            <Setter Property="Foreground" Value="White"/>
+            <!-- White text -->
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="#388E3C"/>
+            <!-- Darker green border -->
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+
+            <!-- ControlTemplate for rounded corners -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="5">
+                            <!-- Rounded corners -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Triggers for hover and pressed states -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#45A049"/>
+                    <!-- Slightly darker green on hover -->
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#388E3C"/>
+                    <!-- Even darker when clicked -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style for the "Cancel" button -->
+        <Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource StyledButton}">
+            <Setter Property="Background" Value="#F44336"/>
+            <!-- Red background -->
+            <Setter Property="BorderBrush" Value="#D32F2F"/>
+            <!-- Darker red border -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E53935"/>
+                    <!-- Darker red on hover -->
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#D32F2F"/>
+                    <!-- Even darker when clicked -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Unité:" Grid.Row="0" Margin="10"/>
-        <ComboBox x:Name="unitsComboBox" Grid.Row="1" Margin="10" Height="25" Width="360" SelectionChanged="UnitsComboBox_SelectionChanged"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Label Content="Module:" Grid.Row="2" Margin="10"/>
-        <ComboBox x:Name="modulesComboBox" Grid.Row="3" Margin="10" Height="25" Width="360"/>
+        <!-- Unité -->
+        <Label Content="Unité:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <ComboBox x:Name="unitsComboBox" Grid.Row="0" Grid.Column="1" Margin="5" Height="25" Width="300" SelectionChanged="UnitsComboBox_SelectionChanged"/>
 
-        <Label Content="Coefficient:" Grid.Row="4" Margin="10"/>
-        <TextBox x:Name="coefTextBox" Grid.Row="5" Margin="10" Height="25" Width="360"/>
+        <!-- Module -->
+        <Label Content="Module:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <ComboBox x:Name="modulesComboBox" Grid.Row="1" Grid.Column="1" Margin="5" Height="25" Width="300"/>
 
-        <Label Content="Score:" Grid.Row="6" Margin="10"/>
-        <TextBox x:Name="scoreTextBox" Grid.Row="5" Margin="61,10,379,171" Height="25" Width="360"/>
+        <!-- Coefficient -->
+        <Label Content="Coefficient:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="coefTextBox" Grid.Row="2" Grid.Column="1" Margin="5" Height="25" Width="300"/>
 
-        <CheckBox x:Name="absentCheckBox" Grid.Row="5" Margin="10,57,0,-37" Content="Absent" HorizontalAlignment="Left"/>
+        <!-- Score -->
+        <Label Content="Score:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="scoreTextBox" Grid.Row="3" Grid.Column="1" Margin="5" Height="25" Width="300"/>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="9" Margin="10">
-            <Button Content="Validate" Click="Validate_Click" Width="80" Margin="5"/>
-            <Button Content="Cancel" Click="Cancel_Click" Width="80" Margin="5"/>
+        <!-- Absent Checkbox -->
+        <CheckBox x:Name="absentCheckBox" Grid.Row="4" Grid.ColumnSpan="2" Content="Absent" HorizontalAlignment="Left" Margin="5"/>
+
+        <!-- Date Picker for Exam Date -->
+        <Label Content="Date d'examen:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <DatePicker x:Name="examDatePicker" Grid.Row="5" Grid.Column="1" Margin="5" Height="25" Width="300"/>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button Content="Valider" Click="Validate_Click" Style="{StaticResource StyledButton}" Height="51" Width="66"/>
+            <Button Content="Annuler" Click="Cancel_Click" Style="{StaticResource CancelButtonStyle}" Height="51" Width="66"/>
         </StackPanel>
     </Grid>
 </Window>
