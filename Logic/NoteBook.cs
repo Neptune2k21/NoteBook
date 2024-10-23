@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Logic
 {
+    [DataContract]
     public class Notebook
     {
+        [DataMember]
         private List<Unit> units;
-        private List<Exam> exams; 
+
+        [DataMember]
+        private List<Exam> exams;
 
         public Notebook()
         {
             units = new List<Unit>();
-            exams = new List<Exam>(); 
+            exams = new List<Exam>();
         }
 
 
@@ -39,12 +45,10 @@ namespace Logic
             units.Remove(unit);
         }
 
-
         public Module[] ListModules()
         {
             return units.SelectMany(unit => unit.ListModules()).ToArray();
         }
-
 
         public void AddExam(Exam exam)
         {
@@ -55,9 +59,11 @@ namespace Logic
         {
             return exams.ToArray();
         }
+
         public AvgScore[] ComputeUnitAverages()
         {
-            return units.Select(u => u.ComputeAverages(exams.ToArray())).SelectMany(avgScores => avgScores).ToArray();
+            return units.Select(u => u.ComputeAverages(exams.ToArray()))
+                        .SelectMany(avgScores => avgScores).ToArray();
         }
 
         public AvgScore ComputeOverallAverage()
