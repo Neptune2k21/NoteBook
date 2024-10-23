@@ -42,5 +42,11 @@ namespace Logic
             Name = name;
             Coefficient = coefficient;
         }
+        public override bool Equals(object obj)
+        {
+            return obj is EducationalElement element &&
+                   Name == element.Name &&
+                   Coefficient == element.Coefficient;
+        }
     }
 }

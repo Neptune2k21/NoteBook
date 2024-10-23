@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
     <ProjectReference Include="..\NoteBook\NoteBook.csproj" />
+    <ProjectReference Include="..\Storage\Storage.csproj" />
   </ItemGroup>
 
   <ItemGroup>

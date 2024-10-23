@@ -1,30 +1,40 @@
-﻿using System.Text;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Logic;
+using Storage;
 
 namespace NoteBook
 {
     public partial class MainWindow : Window
     {
         private Notebook notebook;
+        private IStorage storage; 
 
         public MainWindow()
         {
             InitializeComponent();
             notebook = new Notebook();
+            storage = new JsonStorage(); 
+            LoadNotebook(); 
+        }
+
+        private void LoadNotebook()
+        {
+            try
+            {
+                notebook = storage.Load(); 
+            }
+            catch (FileNotFoundException)
+            {
+               
+                notebook = new Notebook();
+            }
         }
 
         private void GoEditUnits(object sender, RoutedEventArgs e)
         {
             EditUnitsWindow second = new EditUnitsWindow(notebook);
+            second.Closed += (s, args) => SaveNotebook(); 
             second.Show();
         }
 
@@ -33,18 +43,32 @@ namespace NoteBook
             EditExamWindow editExamWindow = new EditExamWindow(notebook);
             if (editExamWindow.ShowDialog() == true)
             {
-               
+                SaveNotebook(); 
             }
         }
+
         private void GoListExams(object sender, RoutedEventArgs e)
         {
             ListExamsWindow listExamsWindow = new ListExamsWindow(notebook);
             listExamsWindow.Show();
         }
-        private void CloseWindow(object sender, RoutedEventArgs e)
+
+        private void SaveNotebook()
         {
-            this.Close();
+            try
+            {
+                storage.Save(notebook);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de la sauvegarde : {ex.Message}"); 
+            }
         }
 
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            SaveNotebook(); 
+            this.Close();
+        }
     }
 }

@@ -23,5 +23,13 @@ namespace Logic
             Date = date ?? DateTime.Now;
             IsAbsent = isAbsent;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Exam exam &&
+                   Module.Equals(exam.Module) &&
+                   Date.ToString("yyyy-MM-dd HH:mm:ss") == exam.Date.ToString("yyyy-MM-dd HH:mm:ss") &&
+                   Score == exam.Score;
+        }
     }
 }
