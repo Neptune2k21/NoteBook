@@ -6,14 +6,36 @@
         xmlns:local="clr-namespace:NoteBook"
         mc:Ignorable="d"
         Title="ListExamsWindow" Height="450" Width="800">
+    <Window.Resources>
+        <!-- Style des boutons -->
+        <Style x:Key="SimpleButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Margin" Value="10"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#388E3C"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        <Button Content="Close" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" MinHeight="30" Click="CloseWindow" />
+
+        <!-- Bouton pour fermer la fenêtre -->
+        <Button Content="Close" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SimpleButtonStyle}" Click="CloseWindow" />
+
+        <!-- Liste des examens -->
         <ListBox x:Name="exams" Grid.Row="1" Margin="10" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -24,14 +46,16 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="{Binding DateExam}" />
-                        <Label Grid.Column="1" Content="{Binding Module.Name}" />
-                        <Label Grid.Column="2" Content="{Binding Teacher}" />
-                        <Label Grid.Column="3" Content="{Binding Score}" />
+                        <Label Grid.Column="0" Content="{Binding DateExam}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Grid.Column="1" Content="{Binding Module.Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Grid.Column="2" Content="{Binding Teacher}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Grid.Column="3" Content="{Binding Score}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <!-- Entêtes des colonnes -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -39,12 +63,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Date examen" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" />
+            <Label Grid.Column="0" Content="Date examen" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <Label Grid.Column="1" Content="Nom du module" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <Label Grid.Column="2" Content="Enseignant" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <Label Grid.Column="3" Content="Note" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold"/>
         </Grid>
 
-        <ListBox Grid.Row="2" Margin="10" x:Name="scores" />
+        <!-- Liste des scores -->
+        <ListBox Grid.Row="2" Margin="10" x:Name="scores"/>
     </Grid>
 </Window>

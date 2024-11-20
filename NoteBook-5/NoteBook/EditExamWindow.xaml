@@ -6,31 +6,63 @@
         xmlns:local="clr-namespace:NoteBook"
         mc:Ignorable="d"
         Title="Create an exam" Height="450" Width="800">
+    <Window.Resources>
+        <!-- Style simple pour les boutons -->
+        <Style x:Key="SimpleButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Margin" Value="10"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#388E3C"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
+
+        <!-- Module -->
         <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Module :"/>
-        <ComboBox x:Name="modules" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Teacher :" />
-        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Date :" />
-        <DatePicker x:Name="date" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10" />
-        <TextBox x:Name="teacher" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10" />
-        <CheckBox x:Name="isAbsent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Is absent" />
-        <Label Grid.Row="2" Grid.Column="0" Content="Score :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <TextBox x:Name="score" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-        <Label Grid.Row="2" Grid.Column="2" Content="Coef :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <TextBox x:Name="coef" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10" />
-        <Button Grid.Column="1" Grid.Row="3" Content="Validate" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10" Click="Validate" />
-        <Button Grid.Column="3" Grid.Row="3" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10" Click="Cancel" />
+        <ComboBox x:Name="modules" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+
+        <!-- Date -->
+        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Date :"/>
+        <DatePicker x:Name="date" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+
+        <!-- Teacher -->
+        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Teacher :"/>
+        <TextBox x:Name="teacher" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+
+        <!-- Absence Checkbox -->
+        <CheckBox x:Name="isAbsent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Is absent"/>
+
+        <!-- Score -->
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Score :"/>
+        <TextBox x:Name="score" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+
+        <!-- Coefficient -->
+        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Coef :"/>
+        <TextBox x:Name="coef" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+
+        <!-- Buttons -->
+        <Button Grid.Row="3" Grid.Column="1" Content="Validate" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SimpleButtonStyle}" Click="Validate"/>
+        <Button Grid.Row="3" Grid.Column="3" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SimpleButtonStyle}" Click="Cancel"/>
     </Grid>
 </Window>
